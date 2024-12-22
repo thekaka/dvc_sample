@@ -1,0 +1,4 @@
+[core]
+    remote = obs_path
+['remote "obs_path"']
+    url = /workspaces/obs/store/
