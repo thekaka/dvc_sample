@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 
-def process_dataset(input_file, output_file, min_duplicate=2):
+def filter_dataset(input_file, output_file, min_duplicate=2):
     """
     处理数据集文件，过滤掉重复数小于 min_duplicate 的样本。
 
@@ -43,7 +43,7 @@ def main():
     args = parser.parse_args()
 
     # 调用处理函数
-    process_dataset(args.input_file, args.output_file, args.min_duplicate)
+    filter_dataset(args.input_file, args.output_file, args.min_duplicate)
 
 if __name__ == "__main__":
     main()

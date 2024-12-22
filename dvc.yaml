@@ -17,7 +17,7 @@ stages:
     - data/intermediate/dataset_filtered_2.index
 
 
-  merge_1:
+  merge_4:
     cmd: python src/merge_datasets.py data/intermediate/dataset_filtered_1.index data/intermediate/dataset_filtered_2.index data/intermediate/dataset_filtered_3.index data/final/dataset.index
     deps:
       - data/intermediate/dataset_filtered_1.index
@@ -25,3 +25,47 @@ stages:
       - data/intermediate/dataset_filtered_3.index
     outs:
       - data/final/dataset.index
+
+  # generate_with_channels:
+  #   cmd: |
+  #     curl -X POST http://backend-service/api/get_channels \
+  #     -H "Content-Type: application/json" \
+  #     -d '{"dataset": "data/final/dataset.index"}' \
+  #     -o obs://remote-bucket/dataset_with_channels.index  # 直接将文件上传到OBS
+  #   deps:
+  #     - data/final/dataset.index
+  #   outs:
+  #     - obs://remote-bucket/dataset_with_channels.index  # 输出到远程OBS，不在本地存储
+
+  # train_model:
+  #   cmd: |
+  #     curl -X POST http://backend-service/api/train_model \
+  #     -H "Content-Type: application/json" \
+  #     -d '{"dataset": "obs://remote-bucket/dataset_with_channels.index"}' \
+  #     -o obs://remote-bucket/model_output/model.pth
+  #   deps:
+  #     - obs://remote-bucket/dataset_with_channels.index  # 从OBS读取数据集
+  #   outs:
+  #     - obs://remote-bucket/model_output/model.pth  # 远程存储训练模型
+  #     - obs://remote-bucket/train_logs/train_log.txt  # 训练日志
+  #     - obs://remote-bucket/train_logs/loss.txt  # 训练过程中的损失日志
+
+  # evaluate_model:
+  #   cmd: |
+  #     curl -X POST http://backend-service/api/evaluate_model \
+  #     -H "Content-Type: application/json" \
+  #     -d '{"model": "obs://remote-bucket/model_output/model.pth", "dataset": "obs://remote-bucket/dataset_with_channels.index"}' \
+  #     -o obs://remote-bucket/model_output/evaluation_results.json
+  #   deps:
+  #     - obs://remote-bucket/model_output/model.pth
+  #     - obs://remote-bucket/dataset_with_channels.index
+  #   outs:
+  #     - obs://remote-bucket/model_output/evaluation_results.json  # 存储评测结果到远程
+
+  # pull_evaluation_results:
+  #   cmd: |
+  #     dvc pull obs://remote-bucket/model_output/evaluation_results.json  # 拉取评测结果到本地
+  #   deps:
+  #     - obs://remote-bucket/model_output/evaluation_results.json  # 拉取到本地的评测结果
+  #   outs:
+  #     - data/final/evaluation_results.json  # 输出到本地
