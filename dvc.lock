@@ -1,47 +1,42 @@
 schema: '2.0'
 stages:
+  merge:
+    cmd: python src/merge_datasets.py data/dataset_1.index data/dataset_2.index data/intermediate/dataset_merged.index
+    deps:
+    - path: data/dataset_1.index
+      hash: md5
+      md5: 21f137705eeb12e6ab17326375448995
+      size: 781
+    - path: data/dataset_2.index
+      hash: md5
+      md5: e5c51f0180a51d6fd3af24dbc32eed3e
+      size: 1641
   filter_1:
-    cmd: python src/filter_dataset.py data/dataset.index data/intermediate/dataset_filtered_1.index
+    cmd: python src/filter_dataset.py data/intermediate/dataset_merged.index data/intermediate/dataset_filtered_1.index
       --min_duplicate=2
     deps:
-    - path: data/dataset.index
+    - path: data/intermediate/dataset_merged.index
       hash: md5
-      md5: 674c7e087072015d4ae7bb1075bcb788
-      size: 838
+      md5: 2ced20e5f2a69de0cfce4967fde58b9c
+      size: 1612
   filter_2:
     cmd: python src/filter_dataset.py data/intermediate/dataset_filtered_1.index data/intermediate/dataset_filtered_2.index
       --min_duplicate=2
     deps:
     - path: data/intermediate/dataset_filtered_1.index
       hash: md5
-      md5: 6fa2a385477fbb36c8f63b93d22597df
-      size: 1562
+      md5: 3aeb67d62591f65cbbd3c05e56aebbe4
+      size: 2238
   filter_3:
-    cmd: python src/filter_dataset.py data/intermediate/dataset_filtered_2.index data/intermediate/dataset_filtered_3.index
+    cmd: python src/filter_dataset.py data/intermediate/dataset_filtered_2.index data/final/dataset.index
       --min_duplicate=2
     deps:
     - path: data/intermediate/dataset_filtered_2.index
       hash: md5
-      md5: 6fa2a385477fbb36c8f63b93d22597df
-      size: 1562
-  merge_1:
-    cmd: python src/merge_datasets.py data/intermediate/dataset_filtered_1.index data/intermediate/dataset_filtered_2.index
-      data/intermediate/dataset_filtered_3.index data/final/dataset.index
-    deps:
-    - path: data/intermediate/dataset_filtered_1.index
-      hash: md5
-      md5: 6fa2a385477fbb36c8f63b93d22597df
-      size: 1562
-    - path: data/intermediate/dataset_filtered_2.index
-      hash: md5
-      md5: 6fa2a385477fbb36c8f63b93d22597df
-      size: 1562
-    - path: data/intermediate/dataset_filtered_3.index
-      hash: md5
-      md5: 6fa2a385477fbb36c8f63b93d22597df
-      size: 1562
+      md5: 3aeb67d62591f65cbbd3c05e56aebbe4
+      size: 2238
     outs:
     - path: data/final/dataset.index
       hash: md5
-      md5: 3b5234ff83dab4ccbc219e9b8e1b09bd
-      size: 108
+      md5: 3aeb67d62591f65cbbd3c05e56aebbe4
+      size: 2238

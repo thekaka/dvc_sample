@@ -1,0 +1,75 @@
+{
+    "scenes": [
+        {
+            "scene_token": "d94a4e77-2d77-423b-8e9f-0a8a35d8a987",
+            "samples": [
+                {
+                    "sample_token": "a647f2b9-1c3c-4d55-a7ac-8fc9b5298a56",
+                    "duplicate": 3
+                },
+                {
+                    "sample_token": "b4f3bdb1-b8da-4233-b81d-0b489ac4a5c3",
+                    "duplicate": 2
+                },
+                {
+                    "sample_token": "e8f68b77-1e93-4ad0-b8ea-63c1b68db3fe",
+                    "duplicate": 5
+                }
+            ]
+        },
+        {
+            "scene_token": "8a32fa65-c473-4c63-9f56-204e073b19d5",
+            "samples": [
+                {
+                    "sample_token": "7a9b6741-bc1f-4d8f-97c1-c1f3a6ef8197",
+                    "duplicate": 4
+                }
+            ]
+        },
+        {
+            "scene_token": "f76e0e9b-e9f9-40b6-89db-5b26d2994c22",
+            "samples": [
+                {
+                    "sample_token": "c764e946-93bc-406b-a23b-15e340a4b618",
+                    "duplicate": 2
+                }
+            ]
+        },
+        {
+            "scene_token": "6fbc2681-df1a-45d5-8c98-5c5a50f4e06c",
+            "samples": [
+                {
+                    "sample_token": "f7c87d26-b415-4bfe-9a06-fad76453f074",
+                    "duplicate": 3
+                }
+            ]
+        },
+        {
+            "scene_token": "aa8d5e19-df9c-4086-8be2-1e28d93551d7",
+            "samples": [
+                {
+                    "sample_token": "599cd3fd-b9cc-4d87-91c6-fb288a57867f",
+                    "duplicate": 2
+                }
+            ]
+        },
+        {
+            "scene_token": "0e8aeb18-5f98-4637-a9cc-c3cc1c509f32",
+            "samples": [
+                {
+                    "sample_token": "5488e3b2-9c8a-4320-9545-f24dbcb1ac1b",
+                    "duplicate": 2
+                }
+            ]
+        },
+        {
+            "scene_token": "736c7f29-08ef-4647-8d2a-d3cd9c982cf1",
+            "samples": [
+                {
+                    "sample_token": "a128fe56-8c29-4d4d-8d94-5ca777973b0e",
+                    "duplicate": 3
+                }
+            ]
+        }
+    ]
+}

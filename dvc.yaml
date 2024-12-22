@@ -1,28 +1,24 @@
 stages:
-  filter_1:
-    cmd: python src/filter_dataset.py data/dataset.index data/intermediate/dataset_filtered_1.index --min_duplicate=2
+  merge:
+    cmd: python src/merge_datasets.py data/dataset_1.index data/dataset_2.index data/intermediate/dataset_merged.index
     deps:
-    - data/dataset.index
+      - data/dataset_1.index
+      - data/dataset_2.index
 
+  filter_1:
+    cmd: python src/filter_dataset.py data/intermediate/dataset_merged.index data/intermediate/dataset_filtered_1.index --min_duplicate=2
+    deps:
+    - data/intermediate/dataset_merged.index
 
   filter_2:
     cmd: python src/filter_dataset.py data/intermediate/dataset_filtered_1.index data/intermediate/dataset_filtered_2.index --min_duplicate=2
     deps:
     - data/intermediate/dataset_filtered_1.index
 
-
   filter_3:
-    cmd: python src/filter_dataset.py data/intermediate/dataset_filtered_2.index data/intermediate/dataset_filtered_3.index --min_duplicate=2
+    cmd: python src/filter_dataset.py data/intermediate/dataset_filtered_2.index data/final/dataset.index --min_duplicate=2
     deps:
     - data/intermediate/dataset_filtered_2.index
-
-
-  merge_4:
-    cmd: python src/merge_datasets.py data/intermediate/dataset_filtered_1.index data/intermediate/dataset_filtered_2.index data/intermediate/dataset_filtered_3.index data/final/dataset.index
-    deps:
-      - data/intermediate/dataset_filtered_1.index
-      - data/intermediate/dataset_filtered_2.index
-      - data/intermediate/dataset_filtered_3.index
     outs:
       - data/final/dataset.index
 

@@ -1,0 +1,26 @@
+{
+  "scenes": [
+    {
+      "scene_token": "a92f3f34-18f4-4c85-b7f4-cd083f4ac80b",
+      "samples": [
+        {
+          "sample_token": "c1d2f2b4-72e9-4d8b-b4b9-cf98fc125f5f",
+          "duplicate": 1
+        },
+        {
+          "sample_token": "f02f5685-bc92-4d08-bf39-3a672540df88",
+          "duplicate": 3
+        }
+      ]
+    },
+    {
+      "scene_token": "42c317b2-5587-4efb-80b7-290fa8772f82",
+      "samples": [
+        {
+          "sample_token": "c7e0f68b-d1e4-4231-b6d5-4e898ed02bda",
+          "duplicate": 2
+        }
+      ]
+    }
+  ]
+}

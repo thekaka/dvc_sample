@@ -9,14 +9,15 @@ def merge_datasets(input_files, output_file):
     :param input_files: 要合并的数据集文件路径列表
     :param output_file: 合并后保存的文件路径
     """
-    merged_data = []
+    merged_data = {"scenes": []}
     
     # 读取每个输入文件并合并数据
     for file in input_files:
         with open(file, 'r') as f:
             data = json.load(f)
-            merged_data.extend(data)
-    
+            # 将每个文件的 scenes 合并到 merged_data 中
+            merged_data["scenes"].extend(data["scenes"])   
+             
     # 写入到输出文件
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
 

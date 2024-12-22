@@ -11,19 +11,15 @@ def filter_dataset(input_file, output_file, min_duplicate=2):
     - output_file: 输出的过滤后文件路径
     - min_duplicate: 最小重复次数，低于该值的样本将被过滤
     """
-    # 读取原始 dataset.index 文件
+    # 打开输入文件并读取数据
     with open(input_file, 'r') as infile:
         data = json.load(infile)
 
     # 过滤 samples，保留 duplicate >= min_duplicate 的样本
-    filtered_samples = [
-        sample for scene in data['scenes'] for sample in scene['samples'] if sample['duplicate'] >= min_duplicate
-    ]
-    
-    # 更新数据
-    data['samples'] = filtered_samples
-
-    # 将过滤后的数据保存到输出文件
+    for scene in data['scenes']:
+        scene['samples'] = [
+            sample for sample in scene['samples'] if sample['duplicate'] >= min_duplicate
+        ]
 
 
     # Create output directory if it doesn't exist
