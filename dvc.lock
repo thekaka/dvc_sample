@@ -1,0 +1,15 @@
+schema: '2.0'
+stages:
+  filter_1:
+    cmd: python src/process_dataset.py data/dataset.index data/dataset_filtered_1.index
+      --min_duplicate=1
+    deps:
+    - path: data/dataset.index
+      hash: md5
+      md5: 674c7e087072015d4ae7bb1075bcb788
+      size: 838
+    outs:
+    - path: data/dataset_filtered_1.index
+      hash: md5
+      md5: 2b825059584125d7980c9e54d7dc7f1c
+      size: 1678
