@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 
 def process_dataset(input_file, output_file, min_duplicate=2):
     """
@@ -23,9 +24,13 @@ def process_dataset(input_file, output_file, min_duplicate=2):
     data['samples'] = filtered_samples
 
     # 将过滤后的数据保存到输出文件
+
+
+    # Create output directory if it doesn't exist
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+
     with open(output_file, 'w') as outfile:
         json.dump(data, outfile, indent=4)
-    
     print(f"Processed dataset saved to {output_file}")
 
 def main():

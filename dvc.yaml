@@ -1,8 +1,19 @@
 stages:
   filter_1:
-    cmd: python src/process_dataset.py data/dataset.index data/dataset_filtered_1.index --min_duplicate=2
+    cmd: python src/process_dataset.py data/dataset.index data/intermediate/dataset_filtered_1.index --min_duplicate=2
     deps:
     - data/dataset.index
-    outs:
-    - data/dataset_filtered_1.index
 
+
+  filter_2:
+    cmd: python src/process_dataset.py data/intermediate/dataset_filtered_1.index data/intermediate/dataset_filtered_2.index --min_duplicate=2
+    deps:
+    - data/intermediate/dataset_filtered_1.index
+
+
+  filter_3:
+    cmd: python src/process_dataset.py data/intermediate/dataset_filtered_2.index data/final/dataset_filtered_3.index --min_duplicate=2
+    deps:
+    - data/intermediate/dataset_filtered_2.index
+    outs:
+    - data/final/dataset_filtered_3.index
