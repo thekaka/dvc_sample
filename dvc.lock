@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   filter_1:
-    cmd: python src/process_dataset.py data/dataset.index data/intermediate/dataset_filtered_1.index
+    cmd: python src/filter_dataset.py data/dataset.index data/intermediate/dataset_filtered_1.index
       --min_duplicate=2
     deps:
     - path: data/dataset.index
@@ -9,23 +9,39 @@ stages:
       md5: 674c7e087072015d4ae7bb1075bcb788
       size: 838
   filter_2:
-    cmd: python src/process_dataset.py data/intermediate/dataset_filtered_1.index
-      data/intermediate/dataset_filtered_2.index --min_duplicate=2
+    cmd: python src/filter_dataset.py data/intermediate/dataset_filtered_1.index data/intermediate/dataset_filtered_2.index
+      --min_duplicate=2
     deps:
     - path: data/intermediate/dataset_filtered_1.index
       hash: md5
       md5: 6fa2a385477fbb36c8f63b93d22597df
       size: 1562
   filter_3:
-    cmd: python src/process_dataset.py data/intermediate/dataset_filtered_2.index
-      data/final/dataset_filtered_3.index --min_duplicate=2
+    cmd: python src/filter_dataset.py data/intermediate/dataset_filtered_2.index data/intermediate/dataset_filtered_3.index
+      --min_duplicate=2
     deps:
     - path: data/intermediate/dataset_filtered_2.index
       hash: md5
       md5: 6fa2a385477fbb36c8f63b93d22597df
       size: 1562
-    outs:
-    - path: data/final/dataset_filtered_3.index
+  merge_1:
+    cmd: python src/merge_datasets.py data/intermediate/dataset_filtered_1.index data/intermediate/dataset_filtered_2.index
+      data/intermediate/dataset_filtered_3.index data/final/dataset.index
+    deps:
+    - path: data/intermediate/dataset_filtered_1.index
       hash: md5
       md5: 6fa2a385477fbb36c8f63b93d22597df
       size: 1562
+    - path: data/intermediate/dataset_filtered_2.index
+      hash: md5
+      md5: 6fa2a385477fbb36c8f63b93d22597df
+      size: 1562
+    - path: data/intermediate/dataset_filtered_3.index
+      hash: md5
+      md5: 6fa2a385477fbb36c8f63b93d22597df
+      size: 1562
+    outs:
+    - path: data/final/dataset.index
+      hash: md5
+      md5: 3b5234ff83dab4ccbc219e9b8e1b09bd
+      size: 108
